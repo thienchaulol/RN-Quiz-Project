@@ -2,6 +2,7 @@ import React, { Component, useState } from 'react';
 import { NativeModules, StyleSheet, 
   TouchableOpacity, Text, View, Image} from 'react-native';
 import ConfettiCannon from 'react-native-confetti-cannon'; //Custom library - https://www.npmjs.com/package/react-native-confetti-cannon
+import RNRestart from 'react-native-restart';
 
 let handleSomeKindOfEvent = () => {
   this.explosion && this.explosion.start();
@@ -13,12 +14,6 @@ const buttonNames = ["J-Hope","Jin", "Jungkook","Park Ji-min","RM", "Suga","V"];
 const YourApp = () => {
   return (
     <View style={styles.myViewStyle}>
-      <ConfettiCannon
-          count={200}
-          origin={{x: 100, y: 100}}
-          autoStart={false}
-          ref={ref => (this.explosion = ref)}
-      />
       <Text style={styles.coolText}>
         GUESS THE BTS MEMBER.
       </Text>
@@ -26,9 +21,15 @@ const YourApp = () => {
         <View style={styles.controlSpace}>
           {createSevenButtonsFam()}
         </View>
-      <Image source={require("./images/incorrect.png")} 
-      style={styles.incorrectImage}/>
+      {/*<Image source={require("./images/incorrect.png")}
+      style={styles.incorrectImage}/>*/}
       <Text style={styles.coolText}>🙌😳💯🎉😃☀️🕺</Text>
+      <ConfettiCannon
+          count={200}
+          origin={{x: 100, y: 100}}
+          autoStart={false}
+          ref={ref => (this.explosion = ref)}
+      />
     </View>
   );
 }
@@ -76,7 +77,8 @@ const checkPicture = (num) =>{
   if(num == randomNumber){
     handleSomeKindOfEvent();
     setTimeout(function(){
-      NativeModules.DevSettings.reload();
+      //NativeModules.DevSettings.reload();
+      RNRestart.Restart();
     }, 5000);
   } else {
     //set opacity of wrong from 0 to 1
