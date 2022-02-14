@@ -1,0 +1,6 @@
+module Pods_CoolProject_CoolProjectTests {
+  umbrella header "Pods-CoolProject-CoolProjectTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
